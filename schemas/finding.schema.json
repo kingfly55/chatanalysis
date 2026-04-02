@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/chatanalysis/schemas/finding.schema.json",
+  "title": "ChatAnalysisFinding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "finding_id",
+    "detector",
+    "category",
+    "title",
+    "summary",
+    "recurrence",
+    "recurrence_basis",
+    "evidence",
+    "detector_metadata",
+    "diagnostics",
+    "caveats"
+  ],
+  "properties": {
+    "finding_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "detector": {"type": "string", "minLength": 1},
+    "category": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "summary": {"type": "string", "minLength": 1},
+    "recurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw_occurrences", "distinct_evidence", "distinct_sessions", "distinct_projects"],
+      "properties": {
+        "raw_occurrences": {"type": "integer", "minimum": 0},
+        "distinct_evidence": {"type": "integer", "minimum": 0},
+        "distinct_sessions": {"type": "integer", "minimum": 0},
+        "distinct_projects": {"type": "integer", "minimum": 0}
+      }
+    },
+    "recurrence_basis": {
+      "type": "object",
+      "additionalProperties": {"type": "string"},
+      "required": ["raw_occurrences", "distinct_evidence", "distinct_sessions", "distinct_projects"]
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "session_id",
+          "project_id",
+          "project_slug",
+          "session_role",
+          "source_file",
+          "source_line",
+          "source_anchor",
+          "excerpt",
+          "qualification"
+        ],
+        "properties": {
+          "evidence_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "session_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "project_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "project_slug": {"type": "string", "minLength": 1},
+          "session_role": {"type": ["string", "null"]},
+          "source_file": {"type": "string", "minLength": 1},
+          "source_line": {"type": "integer", "minimum": 1},
+          "source_anchor": {"type": "string", "minLength": 1},
+          "excerpt": {"type": ["string", "null"]},
+          "qualification": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "detector_metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["version", "ruleset"]
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["candidate_key", "qualified_evidence_count"]
+    },
+    "caveats": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/chatanalysis/schemas/run_manifest.schema.json",
+  "title": "ChatAnalysisRunManifest",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "command",
+    "started_at",
+    "completed_at",
+    "config_fingerprint",
+    "input_scope",
+    "artifact_paths"
+  ],
+  "properties": {
+    "command": {
+      "type": "string",
+      "minLength": 1
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "config_fingerprint": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "input_scope": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["label"],
+      "properties": {
+        "label": {"type": "string", "minLength": 1},
+        "include_projects": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "exclude_projects": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "include_subagents": {"type": "boolean"}
+      }
+    },
+    "artifact_paths": {
+      "type": "object",
+      "additionalProperties": {"type": "string"}
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "episode_turn.schema.json",
+  "title": "ChatAnalysisEpisodeTurn",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "turn_id",
+    "episode_id",
+    "turn_index",
+    "role",
+    "content_text",
+    "compressed_text",
+    "tool_context",
+    "evidence_id",
+    "raw_event_id",
+    "raw_event_index",
+    "session_id",
+    "root_session_id",
+    "parent_session_id",
+    "session_role"
+  ],
+  "properties": {
+    "turn_id":          { "type": "string" },
+    "episode_id":       { "type": "string" },
+    "turn_index":       { "type": "integer", "minimum": 0 },
+    "role":             { "type": "string", "enum": ["user", "assistant"] },
+    "content_text":     { "type": ["string", "null"] },
+    "compressed_text":  { "type": ["string", "null"] },
+    "tool_context": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["raw_event_id", "raw_event_index", "session_id"],
+        "properties": {
+          "tool_use_id":        { "type": ["string", "null"] },
+          "tool_name":          { "type": ["string", "null"] },
+          "call_text":          { "type": ["string", "null"] },
+          "result_text":        { "type": ["string", "null"] },
+          "is_error":           { "type": ["boolean", "null"] },
+          "call_evidence_id":   { "type": ["string", "null"] },
+          "result_evidence_id": { "type": ["string", "null"] },
+          "raw_event_id":       { "type": "string" },
+          "raw_event_index":    { "type": "integer", "minimum": 0 },
+          "session_id":         { "type": "string" }
+        }
+      }
+    },
+    "evidence_id":       { "type": "string" },
+    "raw_event_id":      { "type": "string" },
+    "raw_event_index":   { "type": "integer", "minimum": 0 },
+    "session_id":        { "type": "string" },
+    "root_session_id":   { "type": ["string", "null"] },
+    "parent_session_id": { "type": ["string", "null"] },
+    "session_role":      { "type": "string" }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/chatanalysis/schemas/detector_run.schema.json",
+  "title": "ChatAnalysisDetectorRun",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["detector", "view_name", "settings", "findings", "diagnostics"],
+  "properties": {
+    "detector": {"type": "string", "minLength": 1},
+    "view_name": {"type": "string", "minLength": 1},
+    "settings": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["min_raw_occurrences", "min_distinct_sessions", "max_evidence"]
+    },
+    "findings": {
+      "type": "array",
+      "items": {"$ref": "./finding.schema.json"}
+    },
+    "diagnostics": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "view_id",
+        "source_evidence_path",
+        "subagent_policy",
+        "recurrence_basis",
+        "rows_scanned",
+        "candidates_considered",
+        "qualified_findings",
+        "detector_version"
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+project:
+  name: chat-analysis
+  version: 1
+paths:
+  source_root: projects
+  artifact_root: artifacts/chat-analysis
+  contracts_dir: artifacts/chat-analysis/contracts
+  discovery_dir: artifacts/chat-analysis/discovery
+  normalization_dir: artifacts/chat-analysis/normalization
+  substrate_dir: artifacts/chat-analysis/substrate
+  reports_dir: artifacts/chat-analysis/reports
+runtime:
+  timezone: UTC
+  write_manifests: true
+  fail_on_schema_error: true
+scope:
+  include_projects: []
+  exclude_projects: []
+  include_subagents: false
+  input_scope: default-local
+views:
+  default_view: user-primary
+  include_assistant_secondary: true
+analysis:
+  seed_expansion_enabled: false
+  semantic_run_enabled: false

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "episode.schema.json",
+  "title": "ChatAnalysisEpisode",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "episode_id",
+    "root_session_id",
+    "project_id",
+    "project_slug",
+    "turn_count",
+    "turns",
+    "child_episode_refs",
+    "session_ids"
+  ],
+  "properties": {
+    "episode_id":         { "type": "string" },
+    "root_session_id":    { "type": "string" },
+    "project_id":         { "type": "string" },
+    "project_slug":       { "type": "string" },
+    "turn_count":         { "type": "integer", "minimum": 0 },
+    "turns": {
+      "type": "array",
+      "items": { "$ref": "episode_turn.schema.json" }
+    },
+    "child_episode_refs": { "type": "array", "items": { "type": "string" } },
+    "session_ids":        { "type": "array", "items": { "type": "string" } }
+  }
+}

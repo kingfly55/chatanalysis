@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/chatanalysis/schemas/corpus_view.schema.json",
+  "title": "ChatAnalysisCorpusViewRow",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "view_name",
+    "view_row_id",
+    "view_ordinal",
+    "filter_decision",
+    "inspection",
+    "evidence"
+  ],
+  "properties": {
+    "view_name": {"type": "string", "minLength": 1},
+    "view_row_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "view_ordinal": {"type": "integer", "minimum": 0},
+    "filter_decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["include", "reason", "matched_scope"],
+      "properties": {
+        "include": {"type": "boolean"},
+        "reason": {"type": "string", "minLength": 1},
+        "matched_scope": {"type": "string", "minLength": 1}
+      }
+    },
+    "inspection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "session_id", "source_file", "source_line", "source_anchor"],
+      "properties": {
+        "evidence_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "session_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "source_file": {"type": "string", "minLength": 1},
+        "source_line": {"type": "integer", "minimum": 1},
+        "source_anchor": {"type": "string", "minLength": 1}
+      }
+    },
+    "evidence": {"$ref": "./evidence.schema.json"}
+  }
+}

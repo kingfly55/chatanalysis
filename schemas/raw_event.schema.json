@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/chatanalysis/schemas/raw_event.schema.json",
+  "title": "ChatAnalysisRawEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "project_id",
+    "project_slug",
+    "session_id",
+    "session_key",
+    "session_role",
+    "source_file",
+    "source_line",
+    "event_index",
+    "parse_status",
+    "record_type",
+    "message_role",
+    "is_sidechain",
+    "raw_record",
+    "parse_error"
+  ],
+  "properties": {
+    "project_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "project_slug": {"type": "string", "minLength": 1},
+    "session_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "session_key": {"type": "string", "minLength": 1},
+    "session_role": {"type": "string", "enum": ["root", "subagent", "unknown"]},
+    "source_file": {"type": "string", "minLength": 1},
+    "source_line": {"type": "integer", "minimum": 1},
+    "event_index": {"type": "integer", "minimum": 0},
+    "parse_status": {
+      "type": "string",
+      "enum": ["parsed", "unknown_record_shape", "invalid_json", "non_object", "blank"]
+    },
+    "record_type": {"type": ["string", "null"]},
+    "message_role": {"type": ["string", "null"]},
+    "is_sidechain": {"type": ["boolean", "null"]},
+    "raw_record": {"type": ["object", "null"]},
+    "parse_error": {"type": ["string", "null"]}
+  }
+}

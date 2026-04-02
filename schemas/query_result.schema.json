@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/chatanalysis/schemas/query_result.schema.json",
+  "title": "ChatAnalysisQueryResult",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "query",
+    "view_name",
+    "view_metadata",
+    "filters",
+    "reproducibility",
+    "recurrence",
+    "summary",
+    "matches"
+  ],
+  "properties": {
+    "query": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["original", "operator", "terms"],
+      "properties": {
+        "original": {"type": "string", "minLength": 1},
+        "operator": {"type": "string", "enum": ["AND", "OR"]},
+        "terms": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["value", "is_phrase"],
+            "properties": {
+              "value": {"type": "string", "minLength": 1},
+              "is_phrase": {"type": "boolean"}
+            }
+          }
+        }
+      }
+    },
+    "view_name": {"type": "string", "minLength": 1},
+    "view_metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["view_id", "source_evidence_path", "subagent_policy", "filters", "recurrence_basis"]
+    },
+    "filters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["project_slugs", "session_ids", "semantic_classes", "include_subagents", "limit"],
+      "properties": {
+        "project_slugs": {"type": "array", "items": {"type": "string"}},
+        "session_ids": {"type": "array", "items": {"type": "string"}},
+        "semantic_classes": {"type": "array", "items": {"type": "string"}},
+        "include_subagents": {"type": ["boolean", "null"]},
+        "limit": {"type": ["integer", "null"], "minimum": 1}
+      }
+    },
+    "reproducibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "view_dir",
+        "corpus_view_path",
+        "view_summary_path",
+        "parsed_query",
+        "filters",
+        "view_id",
+        "subagent_policy"
+      ],
+      "properties": {
+        "view_dir": {"type": "string", "minLength": 1},
+        "corpus_view_path": {"type": "string", "minLength": 1},
+        "view_summary_path": {"type": "string", "minLength": 1},
+        "parsed_query": {"type": "object"},
+        "filters": {"type": "object"},
+        "view_id": {"type": ["string", "null"]},
+        "subagent_policy": {"type": ["string", "null"]}
+      }
+    },
+    "recurrence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw_occurrences", "distinct_evidence", "distinct_sessions", "distinct_projects"],
+      "properties": {
+        "raw_occurrences": {"type": "integer", "minimum": 0},
+        "distinct_evidence": {"type": "integer", "minimum": 0},
+        "distinct_sessions": {"type": "integer", "minimum": 0},
+        "distinct_projects": {"type": "integer", "minimum": 0}
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["total_matches", "representative_examples", "distinct_projects", "distinct_sessions"],
+      "properties": {
+        "total_matches": {"type": "integer", "minimum": 0},
+        "representative_examples": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/match"}
+        },
+        "distinct_projects": {"type": "integer", "minimum": 0},
+        "distinct_sessions": {"type": "integer", "minimum": 0}
+      }
+    },
+    "matches": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/match"}
+    }
+  },
+  "$defs": {
+    "match": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "session_id",
+        "project_slug",
+        "semantic_class",
+        "session_role",
+        "source_file",
+        "source_line",
+        "source_anchor",
+        "content_text",
+        "matched_terms"
+      ],
+      "properties": {
+        "evidence_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "session_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "project_slug": {"type": "string", "minLength": 1},
+        "semantic_class": {"type": ["string", "null"]},
+        "session_role": {"type": ["string", "null"]},
+        "source_file": {"type": "string", "minLength": 1},
+        "source_line": {"type": "integer", "minimum": 1},
+        "source_anchor": {"type": "string", "minLength": 1},
+        "content_text": {"type": ["string", "null"]},
+        "matched_terms": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

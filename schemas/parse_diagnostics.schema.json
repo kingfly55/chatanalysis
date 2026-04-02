@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/chatanalysis/schemas/parse_diagnostics.schema.json",
+  "title": "ChatAnalysisParseDiagnostics",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["aggregate", "files"],
+  "properties": {
+    "aggregate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "files",
+        "total_lines",
+        "parsed_events",
+        "invalid_lines",
+        "blank_lines",
+        "non_object_lines",
+        "unknown_record_shapes"
+      ],
+      "properties": {
+        "files": {"type": "integer", "minimum": 0},
+        "total_lines": {"type": "integer", "minimum": 0},
+        "parsed_events": {"type": "integer", "minimum": 0},
+        "invalid_lines": {"type": "integer", "minimum": 0},
+        "blank_lines": {"type": "integer", "minimum": 0},
+        "non_object_lines": {"type": "integer", "minimum": 0},
+        "unknown_record_shapes": {"type": "integer", "minimum": 0}
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "project_id",
+          "session_id",
+          "source_file",
+          "session_role",
+          "total_lines",
+          "parsed_events",
+          "invalid_lines",
+          "blank_lines",
+          "non_object_lines",
+          "unknown_record_shapes"
+        ],
+        "properties": {
+          "project_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "session_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "source_file": {"type": "string", "minLength": 1},
+          "session_role": {"type": "string", "enum": ["root", "subagent", "unknown"]},
+          "total_lines": {"type": "integer", "minimum": 0},
+          "parsed_events": {"type": "integer", "minimum": 0},
+          "invalid_lines": {"type": "integer", "minimum": 0},
+          "blank_lines": {"type": "integer", "minimum": 0},
+          "non_object_lines": {"type": "integer", "minimum": 0},
+          "unknown_record_shapes": {"type": "integer", "minimum": 0}
+        }
+      }
+    }
+  }
+}

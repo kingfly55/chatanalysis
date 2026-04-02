@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv*/
+.pipeline-logs/
+*.pkl
+
+# User data — never commit to public branches
+projects/
+artifacts/
+.env
+
+# Optional extras (not part of core package)
+embedding-test/
+harness-engineering.md
+pipeline.py
+*.egg-info/

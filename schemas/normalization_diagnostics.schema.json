@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/chatanalysis/schemas/normalization_diagnostics.schema.json",
+  "title": "ChatAnalysisNormalizationDiagnostics",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "total_events",
+    "total_evidence",
+    "zero_evidence_events",
+    "multi_evidence_events",
+    "semantic_class_counts",
+    "inclusion_status_counts",
+    "inclusion_rationale_counts",
+    "transform_outcome_counts",
+    "ambiguous_items",
+    "transform_outcomes"
+  ],
+  "properties": {
+    "total_events": {"type": "integer", "minimum": 0},
+    "total_evidence": {"type": "integer", "minimum": 0},
+    "zero_evidence_events": {"type": "integer", "minimum": 0},
+    "multi_evidence_events": {"type": "integer", "minimum": 0},
+    "semantic_class_counts": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "inclusion_status_counts": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "inclusion_rationale_counts": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "transform_outcome_counts": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "ambiguous_items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_id",
+          "raw_event_id",
+          "semantic_class",
+          "ambiguity_reason",
+          "source_file",
+          "source_line"
+        ],
+        "properties": {
+          "evidence_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "raw_event_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "semantic_class": {"type": "string"},
+          "ambiguity_reason": {"type": ["string", "null"]},
+          "source_file": {"type": "string", "minLength": 1},
+          "source_line": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "transform_outcomes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "raw_event_id",
+          "raw_event_index",
+          "source_file",
+          "source_line",
+          "evidence_count",
+          "outcome",
+          "reasons"
+        ],
+        "properties": {
+          "raw_event_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+          "raw_event_index": {"type": "integer", "minimum": 0},
+          "source_file": {"type": "string", "minLength": 1},
+          "source_line": {"type": "integer", "minimum": 1},
+          "evidence_count": {"type": "integer", "minimum": 0},
+          "outcome": {"type": "string", "enum": ["single_evidence", "multiple_evidence", "zero_evidence"]},
+          "reasons": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

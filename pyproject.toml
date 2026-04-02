@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chatanalysis"
+version = "0.1.0"
+description = "Analyze Claude Code chat transcripts to surface recurring patterns, extract episode workflows, and mine reusable skills"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.11"
+authors = [
+  { name = "Gunnar" }
+]
+dependencies = []
+
+[project.optional-dependencies]
+semantic-local = [
+  "sentence-transformers>=3.0",
+  "scikit-learn>=1.4",
+  "umap-learn>=0.5",
+  "hdbscan>=0.8",
+  "matplotlib>=3.7",
+  "numpy>=1.24",
+]
+skill-mining = [
+  "pydantic-ai>=1.0",
+]
+all = [
+  "chatanalysis[semantic-local,skill-mining]",
+]
+
+[project.scripts]
+chatanalysis = "chatanalysis.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

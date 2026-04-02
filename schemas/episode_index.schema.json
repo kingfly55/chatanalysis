@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "episode_index.schema.json",
+  "title": "ChatAnalysisEpisodeIndex",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "episode_count",
+    "turn_count",
+    "root_session_ids",
+    "episode_ids",
+    "child_ref_count"
+  ],
+  "properties": {
+    "run_id":           { "type": "string" },
+    "episode_count":    { "type": "integer", "minimum": 0 },
+    "turn_count":       { "type": "integer", "minimum": 0 },
+    "root_session_ids": { "type": "array", "items": { "type": "string" } },
+    "episode_ids":      { "type": "array", "items": { "type": "string" } },
+    "child_ref_count":  { "type": "integer", "minimum": 0 }
+  }
+}

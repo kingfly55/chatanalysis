@@ -1,0 +1,6 @@
+{"type":"user","message":{"role":"user","content":"hello"},"isSidechain":false}
+{"type":"assistant","message":{"role":"assistant","content":[{"type":"text","text":"world"}]},"isSidechain":false}
+{"mystery":true,"payload":{"nested":1}}
+not-json
+[1,2,3]
+

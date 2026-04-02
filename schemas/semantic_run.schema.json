@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/chatanalysis/schemas/semantic_run.schema.json",
+  "title": "ChatAnalysisSemanticRun",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["method", "canonical_input", "derived_output", "parameters", "non_canonical"],
+  "properties": {
+    "method": {"type": "string", "minLength": 1},
+    "canonical_input": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["view_name", "view_dir", "evidence_count", "evidence_ids", "session_roles"]
+    },
+    "derived_output": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["derived_output_id", "kind"]
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": true,
+      "minProperties": 1
+    },
+    "non_canonical": {"type": "boolean", "const": true}
+  }
+}
