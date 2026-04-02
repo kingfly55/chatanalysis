@@ -218,6 +218,26 @@ chatanalysis/
   artifacts/              # Generated pipeline output (auto-created)
 ```
 
+## Troubleshooting
+
+**"Could not find Claude Code transcripts"**
+Claude Code stores transcripts at `~/.claude/projects/`. If yours are elsewhere, pass the path: `./run-analysis.sh /path/to/transcripts`
+
+**"No .jsonl transcript files found"**
+The expected structure is `projects/-project-name/session-uuid.jsonl`. Each `.jsonl` file is one conversation session.
+
+**"ModuleNotFoundError: sentence_transformers"**
+Install the optional clustering extras: `pip install -e '.[semantic-local]'`
+
+**"CHATANALYSIS_LLM_API_KEY not set" / empty API key**
+Copy `.env.example` to `.env` and add your API key. Only needed for `semantic-run --method skill-mining --backend pydantic-ai`.
+
+**Integration tests fail**
+Most integration tests require pipeline artifacts. Run `./run-analysis.sh` first to generate them.
+
+**Pipeline is slow on large corpora**
+The normalize and parse stages process every transcript sequentially. For 500+ sessions, expect a few minutes. Evidence files can be 100+ MB — this is normal.
+
 ## Design principles
 
 - **Zero core dependencies** — the base pipeline runs on Python 3.11+ with nothing else installed
