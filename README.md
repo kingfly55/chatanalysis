@@ -58,11 +58,11 @@ SKILLDRILLA_LLM_API_KEY=sk-your-key-here
 
 # Fast model — used for cluster labelling, arc classification, nuance extraction
 # Needs to be cheap/fast since it gets called 15-25 times
-SKILLDRILLA_LLM_MODEL=gpt-4o-mini
+SKILLDRILLA_LLM_MODEL=claude-haiku-4-5
 
 # Heavy model — used for final skill file generation
 # Called once per skill, can take 5-20 minutes per call, but produces much better output
-SKILLDRILLA_LLM_MODEL_HEAVY=gpt-4o
+SKILLDRILLA_LLM_MODEL_HEAVY=claude-opus-4-6
 ```
 
 ### Verify your transcripts exist
@@ -184,8 +184,8 @@ After running clustering + skill mining:
 |---|---|---|
 | `SKILLDRILLA_LLM_BASE_URL` | `https://api.openai.com/v1` | OpenAI-compatible endpoint (any provider) |
 | `SKILLDRILLA_LLM_API_KEY` | _(empty)_ | API key for the endpoint |
-| `SKILLDRILLA_LLM_MODEL` | `gpt-4o-mini` | Fast model for labelling, classification, extraction (15-25 calls) |
-| `SKILLDRILLA_LLM_MODEL_HEAVY` | `gpt-4o` | Heavy model for skill file generation (1 call per skill, 5-20 min each) |
+| `SKILLDRILLA_LLM_MODEL` | `claude-haiku-4-5` | Fast model for labelling, classification, extraction (15-25 calls) |
+| `SKILLDRILLA_LLM_MODEL_HEAVY` | `claude-opus-4-6` | Heavy model for skill file generation (1 call per skill, 5-20 min each) |
 | `SKILLDRILLA_EMBEDDING_MODEL` | `all-MiniLM-L6-v2` | Sentence-transformer for clustering (auto-downloads) |
 
 ## Available CLI commands

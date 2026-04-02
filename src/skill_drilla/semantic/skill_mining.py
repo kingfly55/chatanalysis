@@ -12,8 +12,8 @@ from skill_drilla.semantic.base import SemanticEvidenceSlice, SemanticMethod, Se
 
 _DEFAULT_BASE_URL = os.environ.get("SKILLDRILLA_LLM_BASE_URL", "https://api.openai.com/v1")
 _DEFAULT_API_KEY = os.environ.get("SKILLDRILLA_LLM_API_KEY", "")
-_DEFAULT_MODEL = os.environ.get("SKILLDRILLA_LLM_MODEL", "gpt-4o-mini")
-_DEFAULT_MODEL_HEAVY = os.environ.get("SKILLDRILLA_LLM_MODEL_HEAVY", os.environ.get("SKILLDRILLA_LLM_MODEL", "gpt-4o"))
+_DEFAULT_MODEL = os.environ.get("SKILLDRILLA_LLM_MODEL", "claude-haiku-4-5")
+_DEFAULT_MODEL_HEAVY = os.environ.get("SKILLDRILLA_LLM_MODEL_HEAVY", os.environ.get("SKILLDRILLA_LLM_MODEL", "claude-opus-4-6"))
 
 
 class SkillMiningMethod(SemanticMethod):

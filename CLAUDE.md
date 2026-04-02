@@ -86,8 +86,8 @@ The stable pipeline commands (in execution order):
 ```
 SKILLDRILLA_LLM_BASE_URL      # OpenAI-compatible endpoint (default: https://api.openai.com/v1)
 SKILLDRILLA_LLM_API_KEY       # API key for the endpoint
-SKILLDRILLA_LLM_MODEL         # Fast model for labelling/classification (default: gpt-4o-mini)
-SKILLDRILLA_LLM_MODEL_HEAVY   # Heavy model for skill file generation (default: gpt-4o)
+SKILLDRILLA_LLM_MODEL         # Fast model for labelling/classification (default: claude-haiku-4-5)
+SKILLDRILLA_LLM_MODEL_HEAVY   # Heavy model for skill file generation (default: claude-opus-4-6)
 SKILLDRILLA_EMBEDDING_MODEL   # Sentence-transformer model (default: all-MiniLM-L6-v2)
 ```
 
